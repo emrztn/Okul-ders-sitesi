@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10/B BİLİŞİM - Ders Portalı</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #090d16;
+      --surface-card: #111726;
+      --surface-hover: #182032;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.16);
+      --text-primary: #f8fafc;
+      --text-muted: #64748b;
+    }
+
+    [data-theme="light"] {
+      --bg-main: #f8fafc;
+      --surface-card: #ffffff;
+      --surface-hover: #f1f5f9;
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --border-strong: rgba(0, 0, 0, 0.16);
+      --text-primary: #0f172a;
+      --text-muted: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      background-color: var(--surface-card);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.9rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--border-strong);
+      background-color: #fff;
+    }
+
+    .brand-title h1 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-credits {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .theme-btn {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 0.4rem 0.85rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .theme-btn:hover {
+      border-color: var(--border-strong);
+      background-color: var(--surface-hover);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      width: 100%;
+      flex: 1;
+    }
+
+    .main-panel {
+      background-color: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 1.75rem;
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.82rem;
+      cursor: pointer;
+    }
+
+    .nav-btn:hover {
+      background-color: var(--surface-hover);
+      border-color: var(--border-strong);
+    }
+
+    .step-header {
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.01em;
+    }
+
+    .grid-subjects {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .card-subject {
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.2rem 0.75rem;
+      text-align: center;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .card-subject:hover {
+      border-color: var(--border-strong);
+      background-color: var(--surface-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Renkli Simge Çerçeveleri */
+    .icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .name-subject {
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .list-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .card-item {
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-item:hover {
+      border-color: var(--border-strong);
+      background-color: var(--surface-hover);
+    }
+
+    .item-info h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+
+    .item-info p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .maintenance-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin: auto 0;
+      padding: 2rem 1rem;
+    }
+
+    .maintenance-logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--border-strong);
+      margin-bottom: 1rem;
+      background-color: #fff;
+    }
+
+    .maintenance-code {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #ef4444;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.03em;
+    }
+
+    .maintenance-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .maintenance-desc {
+      color: var(--text-muted);
+      max-width: 380px;
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.25rem;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <img src="logo.jpg" alt="Berat Emir Logo" class="brand-logo">
+      <div class="brand-title">
+        <h1>10/B BİLİŞİM</h1>
+        <div class="brand-credits">Yapıcı: Berat, Emir • Fikir: Kutluhan</div>
+      </div>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙 Siyah Mod</button>
+  </header>
+
+  <div class="container">
+    <div class="main-panel" id="mainPanel"></div>
+  </div>
+
+  <footer>
+    &copy; 2026 10/B Bilişim Sınıfı Portalı
+  </footer>
+
+  <script>
+    const subjectsData = {
+      fizik: {
+        name: "Fizik",
+        icon: "⚡",
+        color: "rgba(234, 179, 8, 0.15)",
+        topics: [
+          {
+            title: "1. ÜNİTE: KUVVET VE HAREKET",
+            subtopics: [
+              { title: "1.1. Sabit Hızlı Hareket", desc: "Konum, alınan yol, yer değiştirme, sürat ve hız kavramları" },
+              { title: "1.2. Bir Boyutta Sabit İvmeli Hareket", desc: "İvme, hız değişimi ve ivmeli hareket grafikleri" },
+              { title: "1. Ünite Ölçme ve Değerlendirme", desc: "Ünite sonu tarama testleri ve soru çözümleri" }
+            ]
+          },
+          {
+            title: "2. ÜNİTE: ENERJİ",
+            subtopics: [
+              { title: "2.1. İş, Enerji ve Güç", desc: "Kuvvet-Yer Değiştirme grafikleri, İş ve Güç hesaplamaları" },
+              { title: "2.2. Enerji Biçimleri", desc: "Kinetik ve potansiyel enerji türleri" },
+              { title: "2.3. Mekanik Enerji", desc: "Mekanik enerjinin korunumu ve dönüşümleri" },
+              { title: "2.4. Enerji Kaynakları", desc: "Yenilenebilir ve yenilenemez enerji kaynakları" },
+              { title: "2. Ünite Ölçme ve Değerlendirme", desc: "Ünite sonu değerlendirme soruları" }
+            ]
+          },
+          {
+            title: "3. ÜNİTE: ELEKTRİK",
+            subtopics: [
+              { title: "3.1. Basit Elektrik Devreleri", desc: "Devre elemanları ve sembolik gösterimleri" },
+              { title: "3.2. Elektrik Akımı", desc: "Akım şiddeti, yük miktarı ve iletkenlik" },
+              { title: "3.3. Ohm Yasası", desc: "Gerilim, akım ve direnç arasındaki ilişki" },
+              { title: "3.4. Dirençlerin Bağlanması", desc: "Seri ve paralel bağlama, eşdeğer direnç" },
+              { title: "3.5. Üreteçlerin Bağlanması", desc: "Pillerin seri, paralel ve ters bağlanması" },
+              { title: "3.6. Elektrik Tehlikeleri ve Önlemler", desc: "Güvenli elektrik kullanımı ve sigorta sistemleri" },
+              { title: "3.7. Topraklamanın Önemi", desc: "Topraklama tesisatı ve hayati önemi" },
+              { title: "3. Ünite Ölçme ve Değerlendirme", desc: "Ünite sonu pekiştirme testleri" }
+            ]
+          },
+          {
+            title: "4. ÜNİTE: DALGALAR",
+            subtopics: [
+              { title: "4.1. Periyodik Hareketler", desc: "Titreşim, genlik, periyot ve frekans kavramları" },
+              { title: "4.2. Dalgaların Temel Kavramları", desc: "Dalga boyu, dalga tepesi ve çukuru" },
+              { title: "4.3. Dalgaların Sınıflandırılması", desc: "Enine ve boyuna dalgalar, mekanik ve elektromanyetik dalgalar" },
+              { title: "4.4. Dalgaların Yayılma Sürati", desc: "Ortam özelliklerinin sürate etkisi" },
+              { title: "4.5. Su Dalgalarında Yansıma ve Kırılma", desc: "Düz ve engel yüzeylerde yansıma kuralları" },
+              { title: "4.6. Rezonans ve Deprem", desc: "Rezonans olayı, deprem dalgaları ve bilimsel modeller" },
+              { title: "4. Ünite Ölçme ve Değerlendirme", desc: "Ünite sonu değerlendirme çalışmaları" }
+            ]
+          }
+        ]
+      },
+      cografya: {
+        name: "Coğrafya",
+        icon: "🌍",
+        color: "rgba(34, 197, 94, 0.15)",
+        topics: [
+          {
+            title: "ÜNİTE 1: DOĞAL SİSTEMLER",
+            subtopics: [
+              { title: "Dünyanın Tektonik Oluşumu", desc: "Levha tektoniği ve jeolojik devirler" },
+              { title: "Kayaçlar", desc: "Püskürük, tortul ve başkalaşım kayaçları" },
+              { title: "Türkiye'nin Yer Şekilleri", desc: "Dağlar, platolar ve ovaların oluşumu" }
+            ]
+          },
+          {
+            title: "ÜNİTE 2: BEŞERÎ SİSTEMLER",
+            subtopics: [
+              { title: "Nüfus Özellikleri", desc: "Nüfusun dağılışı ve nüfus piramitleri" },
+              { title: "Göçlerin Nedenleri", desc: "İç ve dış göç hareketleri" }
+            ]
+          }
+        ]
+      },
+      edebiyat: {
+        name: "Edebiyat",
+        icon: "📚",
+        color: "rgba(239, 68, 68, 0.15)",
+        topics: [
+          {
+            title: "1. ÜNİTE: GİRİŞ",
+            subtopics: [
+              { title: "Edebiyat-Tarih İlişkisi", desc: "Edebiyatın toplum ve tarihle etkileşimi" },
+              { title: "Türk Edebiyatının Dönemleri", desc: "İslamiyet öncesi, etkisinde ve batı etkisinde edebiyat" }
+            ]
+          },
+          {
+            title: "2. ÜNİTE: HİKÂYE",
+            subtopics: [
+              { title: "Dede Korkut Hikâyeleri", desc: "Oğuz Türklerinin anlatıları ve yapısı" },
+              { title: "Halk Hikâyeleri ve Mesnevi", desc: "Anonim ve divan dönemi hikâyeciliği" }
+            ]
+          }
+        ]
+      },
+      matematik: {
+        name: "Matematik",
+        icon: "📐",
+        color: "rgba(59, 130, 246, 0.15)",
+        topics: [
+          {
+            title: "1. ÜNİTE: SAYMA VE OLASILIK",
+            subtopics: [
+              { title: "Permütasyon ve Kombinasyon", desc: "Sıralama ve seçme problemleri" },
+              { title: "Olasılık", desc: "Basit olayların olası sonuçları" }
+            ]
+          },
+          {
+            title: "2. ÜNİTE: FONKSİYONLAR",
+            subtopics: [
+              { title: "Fonksiyon Kavramı ve Grafikleri", desc: "Birebir ve örten fonksiyonlar" },
+              { title: "Bileşke ve Ters Fonksiyon", desc: "Fonksiyonlarda işlemler" }
+            ]
+          }
+        ]
+      },
+      kimya: {
+        name: "Kimya",
+        icon: "🧪",
+        color: "rgba(168, 85, 247, 0.15)",
+        topics: [
+          {
+            title: "1. ÜNİTE: KİMYANIN TEMEL KANUNLARI",
+            subtopics: [
+              { title: "Kütlenin Korunumu ve Katlı Oranlar", desc: "Lavoisier ve Proust kanunları" },
+              { title: "Mol Kavramı", desc: "Avogadro sayısı ve mol hesaplamaları" }
+            ]
+          }
+        ]
+      },
+      biyoloji: {
+        name: "Biyoloji",
+        icon: "🧬",
+        color: "rgba(20, 184, 166, 0.15)",
+        topics: [
+          {
+            title: "1. ÜNİTE: HÜCRE BÖLÜNMELERİ",
+            subtopics: [
+              { title: "Mitoz Bölünme", desc: "Hücre döngüsü ve evreleri" },
+              { title: "Mayoz Bölünme", desc: "Krossing-over ve çeşitlilik" }
+            ]
+          }
+        ]
+      },
+      tarih: {
+        name: "Tarih",
+        icon: "📜",
+        color: "rgba(249, 115, 22, 0.15)",
+        topics: [
+          {
+            title: "1. ÜNİTE: SELÇUKLU TÜRKİYESİ",
+            subtopics: [
+              { title: "Anadolu'nun Türkleşmesi", desc: "Malazgirt sonrası kurulan beylikler" }
+            ]
+          }
+        ]
+      },
+      felsefe: {
+        name: "Felsefe",
+        icon: "🏛️",
+        color: "rgba(236, 72, 153, 0.15)",
+        topics: [
+          {
+            title: "1. ÜNİTE: FELSEFEYİ TANIMA",
+            subtopics: [
+              { title: "Felsefi Düşünce", desc: "Felsefenin anlamı ve sorgulama" }
+            ]
+          }
+        ]
+      },
+      din: {
+        name: "Din Kültürü",
+        icon: "🌙",
+        color: "rgba(99, 102, 241, 0.15)",
+        topics: [
+          {
+            title: "1. ÜNİTE: ALLAH İNANCI VE İNSAN",
+            subtopics: [
+              { title: "İnsanın Fıtratı", desc: "İnanç ve ibadet ilişkisi" }
+            ]
+          }
+        ]
+      },
+      nesne: {
+        name: "Nesne Tabanlı Prog.",
+        icon: "💻",
+        color: "rgba(6, 182, 212, 0.15)",
+        topics: [
+          {
+            title: "1. ÜNİTE: KODLAMA TEMELLERİ",
+            subtopics: [
+              { title: "Değişkenler ve Veri Tipleri", desc: "C# / Java temelleri" },
+              { title: "Karar Yapıları", desc: "If-Else ve Switch-Case kullanımı" }
+            ]
+          }
+        ]
+      },
+      robotik: {
+        name: "Robotik Kodlama",
+        icon: "🤖",
+        color: "rgba(132, 204, 22, 0.15)",
+        topics: [
+          {
+            title: "1. ÜNİTE: SENSÖRLER VE MİKRODENETLEYİCİLER",
+            subtopics: [
+              { title: "Arduino Programlama", desc: "Pin modları ve sensör veri okuma" }
+            ]
+          }
+        ]
+      }
+    };
+
+    let currentSubjectKey = null;
+    let currentTopicIdx = null;
+
+    window.onload = () => renderStep1();
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      document.getElementById('themeBtn').textContent = isDark ? '☀️ Beyaz Mod' : '🌙 Siyah Mod';
+    }
+
+    // 1. ADIM: Dersler
+    function renderStep1() {
+      currentSubjectKey = null;
+      currentTopicIdx = null;
+      const panel = document.getElementById('mainPanel');
+      let html = `
+        <div class="panel-nav">
+          <div class="step-header">Dersler</div>
+        </div>
+        <div class="grid-subjects">
+      `;
+
+      Object.keys(subjectsData).forEach(key => {
+        const sub = subjectsData[key];
+        html += `
+          <div class="card-subject" onclick="renderStep2('${key}')">
+            <div class="icon-box" style="background-color: ${sub.color};">${sub.icon}</div>
+            <div class="name-subject">${sub.name}</div>
+          </div>
+        `;
+      });
+
+      html += `</div>`;
+      panel.innerHTML = html;
+    }
+
+    // 2. ADIM: Üniteler
+    function renderStep2(key) {
+      currentSubjectKey = key;
+      currentTopicIdx = null;
+      const sub = subjectsData[key];
+      const panel = document.getElementById('mainPanel');
+
+      let html = `
+        <div class="panel-nav">
+          <button class="nav-btn" onclick="renderStep1()">← Derslere Dön</button>
+          <div class="step-header">${sub.icon} ${sub.name}</div>
+        </div>
+        <div class="list-items">
+      `;
+
+      sub.topics.forEach((topic, idx) => {
+        html += `
+          <div class="card-item" onclick="renderStep3(${idx})">
+            <div class="item-info">
+              <h4>${topic.title}</h4>
+              <p>${topic.subtopics.length} Kazanım / Alt Başlık</p>
+            </div>
+            <span style="color: var(--text-muted);">→</span>
+          </div>
+        `;
+      });
+
+      html += `</div>`;
+      panel.innerHTML = html;
+    }
+
+    // 3. ADIM: Kazanımlar
+    function renderStep3(topicIdx) {
+      currentTopicIdx = topicIdx;
+      const sub = subjectsData[currentSubjectKey];
+      const topic = sub.topics[topicIdx];
+      const panel = document.getElementById('mainPanel');
+
+      let html = `
+        <div class="panel-nav">
+          <button class="nav-btn" onclick="renderStep2('${currentSubjectKey}')">← Ünitelere Dön</button>
+          <div class="step-header">${topic.title}</div>
+        </div>
+        <div class="list-items">
+      `;
+
+      topic.subtopics.forEach((subtopic) => {
+        html += `
+          <div class="card-item" onclick="renderStep4('${subtopic.title}')">
+            <div class="item-info">
+              <h4>${subtopic.title}</h4>
+              <p>${subtopic.desc}</p>
+            </div>
+            <span style="color: var(--text-muted);">→</span>
+          </div>
+        `;
+      });
+
+      html += `</div>`;
+      panel.innerHTML = html;
+    }
+
+    // 4. ADIM: Kazanım Tıklandıktan Sonraki 404 Ekranı
+    function renderStep4(subtopicTitle) {
+      const sub = subjectsData[currentSubjectKey];
+      const panel = document.getElementById('mainPanel');
+
+      panel.innerHTML = `
+        <div class="panel-nav">
+          <button class="nav-btn" onclick="renderStep3(${currentTopicIdx})">← Kazanımlara Dön</button>
+          <div class="step-header" style="font-size:0.8rem; color:var(--text-muted);">${sub.name} / ${subtopicTitle}</div>
+        </div>
+        <div class="maintenance-box">
+          <img src="logo.jpg" alt="Berat Emir Logo" class="maintenance-logo">
+          <div class="maintenance-code">404</div>
+          <div class="maintenance-title">Kazanım İçeriği Hazırlanıyor</div>
+          <div class="maintenance-desc">
+            <strong>${subtopicTitle}</strong> ders notları, alıştırmaları ve soru bankası yakında eklenecektir.
+          </div>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
+
