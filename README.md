@@ -2,13 +2,11 @@
 
 > **İnternetsiz Ortamlar İçin Özel Olarak Hazırlanmış Çevrimdışı Ders Kitabı Web Projesi**
 
-![Kitap Önizleme](https://raw.githubusercontent.com/othneildrew/Best-README-Template/master/images/screenshot.png)
-
 ---
 
 ## ⚡ Proje Hakkında
 
-Bu proje, **OGM Materyal** üzerindeki 9. Sınıf etkileşimli ders kitaplarının okul ortamında **internet bağlantısı olmadan (Offline)** yerel sunucularda (`localhost`) sorunsuz bir şekilde çalıştırılması amacıyla geliştirilmiştir.
+Bu proje, **OGM Materyal** üzerindeki 10. Sınıf etkileşimli ders kitaplarının okul ortamında **internet bağlantısı olmadan (Offline)** yerel sunucularda (`localhost`) sorunsuz bir şekilde çalıştırılması amacıyla geliştirilmiştir.
 
 ---
 
@@ -20,9 +18,3 @@ Bu proje, **OGM Materyal** üzerindeki 9. Sınıf etkileşimli ders kitapların�
 
 ---
 
-## 🛠️ Kurulum ve Çalıştırma
-
-1. **Repoyu klonlayın veya indirin:**
-   ```bash
-   git clone [https://github.com/KULLANICI_ADI/REPO_ADI.git](https://github.com/KULLANICI_ADI/REPO_ADI.git)
-   
