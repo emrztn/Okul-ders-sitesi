@@ -7,35 +7,55 @@
 <style>
 :root{--bg:#090d16;--card:#111726;--hover:#1a263b;--border:rgba(255,255,255,.12);--text:#f8fafc;--muted:#94a3b8;--accent:#38bdf8;--shadow:rgba(2,6,23,.45)}
 [data-theme=light]{--bg:#f8fafc;--card:#fff;--hover:#eef4fa;--border:rgba(15,23,42,.12);--text:#0f172a;--muted:#64748b;--accent:#0284c7;--shadow:rgba(100,116,139,.2)}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;transition:background .3s,color .3s}button{font:inherit;cursor:pointer}header{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 1.5rem;background:var(--card);border-bottom:1px solid var(--border);box-shadow:0 8px 24px var(--shadow)}.brand{display:flex;align-items:center;gap:.85rem}.brand-logo{width:46px;height:46px;border-radius:12px;object-fit:cover;border:1px solid var(--border);background:#fff}.brand h1{font-size:clamp(1rem,2vw,1.4rem)}.brand small{display:block;color:var(--muted);margin-top:3px}.theme-btn,.nav-btn{border:1px solid var(--border);border-radius:12px;background:transparent;color:var(--text);padding:.7rem .9rem;font-weight:700}.theme-btn:hover,.nav-btn:hover{background:var(--hover);border-color:var(--accent)}main{width:min(980px,calc(100% - 2rem));margin:1.5rem auto 2rem;flex:1}.panel{min-height:450px;padding:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:20px;box-shadow:0 12px 30px var(--shadow)}.panel-nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.3rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.step{font-size:1.15rem;font-weight:800}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.85rem}.card{position:relative;display:flex;flex-direction:column;gap:.6rem;min-height:150px;padding:1rem;border:1px solid var(--border);border-radius:17px;background:linear-gradient(145deg,rgba(255,255,255,.035),transparent);transition:.2s}.card:hover{transform:translateY(-3px);border-color:var(--accent);background:var(--hover)}.subject{cursor:pointer}.icon{display:grid;place-items:center;width:46px;height:46px;border-radius:13px;background:rgba(56,189,248,.13);border:1px solid rgba(56,189,248,.3);font-size:1.35rem}.name{font-size:1rem;font-weight:800}.muted{color:var(--muted);line-height:1.5;font-size:.9rem}.topic{cursor:pointer;min-height:auto}.topic .row{display:flex;align-items:center;justify-content:space-between;gap:1rem}.arrow{color:var(--accent);font-size:1.3rem}.content{text-align:center;padding:3rem 1rem}.content .icon{margin:0 auto 1rem}.content h2{margin-bottom:.7rem}.content p{max-width:560px;margin:auto;color:var(--muted);line-height:1.7}footer{text-align:center;padding:1rem;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border)}@media(max-width:640px){header{padding:.85rem 1rem}.brand small{font-size:.75rem}.theme-btn{font-size:.75rem;padding:.55rem}.panel{padding:1rem}.panel-nav{align-items:flex-start;flex-direction:column}}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 28px;border-bottom:1px solid var(--border);background:rgba(15,23,42,.5);backdrop-filter:blur(12px);position:sticky;top:0;z-index:10}.brand{display:flex;align-items:center;gap:14px}.brand-logo{width:60px;height:60px;border-radius:16px;object-fit:cover;border:1px solid var(--border)}.brand h1{font-size:clamp(1.2rem,2vw,2rem);letter-spacing:.04em}.brand small{display:block;color:var(--muted);margin-top:4px}.header-actions{display:flex;align-items:center;gap:12px}.theme-btn,.admin-btn{appearance:none;border:1px solid var(--border);border-radius:12px;padding:10px 14px;background:var(--card);color:var(--text);font-weight:700;cursor:pointer;transition:transform .15s ease,background .15s ease,opacity .15s ease;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}.theme-btn:hover,.admin-btn:hover{transform:translateY(-1px);background:var(--hover)}.admin-btn{background:rgba(56,189,248,.12);color:var(--accent);border-color:rgba(56,189,248,.35)}.admin-btn:hover{background:rgba(56,189,248,.18)}main{flex:1;padding:26px 18px 30px} .panel{max-width:1100px;margin:0 auto}.panel-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}.step{font-size:1rem;font-weight:700;color:var(--muted)}.nav-btn{appearance:none;border:1px solid var(--border);border-radius:12px;padding:10px 14px;background:var(--card);color:var(--text);cursor:pointer;font-weight:700}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:0 18px 36px var(--shadow);cursor:pointer;transition:transform .15s ease, border-color .15s ease}.card:hover{transform:translateY(-2px);border-color:rgba(56,189,248,.45)}.card-title{font-size:1.3rem;margin-bottom:10px}.unit-list{list-style:none;display:flex;flex-direction:column;gap:10px}.unit-list li{padding:12px 14px;border-radius:12px;background:rgba(148,163,184,.06);border:1px solid transparent;color:var(--text);cursor:pointer;transition:background .15s ease,border-color .15s ease}.unit-list li:hover{background:rgba(56,189,248,.08);border-color:rgba(56,189,248,.2)}footer{padding:18px 20px;text-align:center;color:var(--muted);border-top:1px solid var(--border)}
+@media (max-width:640px){header{padding:14px 16px;flex-wrap:wrap}.brand{flex:1 1 100%}.header-actions{width:100%;justify-content:space-between}.theme-btn,.admin-btn{flex:1}} 
 </style>
 </head>
 <body>
-<header><div class="brand"><img src="logo.jpg" class="brand-logo" alt="10/B Bilişim logosu"><div><h1>10/B BİLİŞİM</h1><small>Ders portalı</small></div></div><button class="theme-btn" id="themeBtn" type="button">🌙 Siyah Mod</button></header>
+<header>
+  <div class="brand">
+    <img src="logo.jpg" class="brand-logo" alt="10/B Bilişim logosu">
+    <div>
+      <h1>10/B BİLİŞİM</h1>
+      <small>Ders portalı</small>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="theme-btn" id="themeBtn" type="button">🌙 Karanlık Mod</button>
+    <a class="admin-btn" href="admin.html" aria-label="Admin paneline git">🔐 Admin</a>
+  </div>
+</header>
 <main><section class="panel" id="mainPanel"></section></main>
 <footer>&copy; 2026 10/B Bilişim Sınıfı Portalı</footer>
 <script>
 'use strict';
 const subjects={
- fizik:['Fizik','⚡',['1. ÜNİTE: KUVVET VE HAREKET','2. ÜNİTE: ENERJİ','3. ÜNİTE: ELEKTRİK','4. ÜNİTE: DALGALAR']],
- cografya:['Coğrafya','🌍',['ÜNİTE 1: DOĞAL SİSTEMLER','ÜNİTE 2: BEŞERÎ SİSTEMLER']],
- edebiyat:['Edebiyat','📚',['1. ÜNİTE: GİRİŞ','2. ÜNİTE: HİKÂYE']],
- matematik:['Matematik','📐',['1. ÜNİTE: SAYMA VE OLASILIK','2. ÜNİTE: FONKSİYONLAR']],
- kimya:['Kimya','🧪',['1. ÜNİTE: KİMYANIN TEMEL KANUNLARI']],
- biyoloji:['Biyoloji','🧬',['1. ÜNİTE: HÜCRE BÖLÜNMELERİ']],
- tarih:['Tarih','📜',['1. ÜNİTE: SELÇUKLU TÜRKİYESİ']],
- felsefe:['Felsefe','🏛️',['1. ÜNİTE: FELSEFEYİ TANIMA']],
- din:['Din Kültürü','🌙',['1. ÜNİTE: ALLAH İNANCI VE İNSAN']],
- nesne:['Nesne Tabanlı Prog.','💻',['1. ÜNİTE: KODLAMA TEMELLERİ']],
- robotik:['Robotik Kodlama','🤖',['1. ÜNİTE: SENSÖRLER VE MİKRODENETLEYİCİLER']]
+  fizik:['Fizik','⚡',['1. ÜNİTE: KUVVET VE HAREKET','2. ÜNİTE: ENERJİ','3. ÜNİTE: ELEKTRİK','4. ÜNİTE: DALGALAR']],
+  cografya:['Coğrafya','🌍',['ÜNİTE 1: DOĞAL SİSTEMLER','ÜNİTE 2: BEŞERÎ SİSTEMLER']],
+  edebiyat:['Edebiyat','📚',['1. ÜNİTE: GİRİŞ','2. ÜNİTE: HİKÂYE']],
+  matematik:['Matematik','📐',['1. ÜNİTE: SAYMA VE OLASILIK','2. ÜNİTE: FONKSİYONLAR']],
+  kimya:['Kimya','🧪',['1. ÜNİTE: KİMYANIN TEMEL KANUNLARI']],
+  biyoloji:['Biyoloji','🧬',['1. ÜNİTE: HÜCRE BÖLÜNMELERİ']],
+  tarih:['Tarih','📜',['1. ÜNİTE: SELÇUKLU TÜRKİYESİ']],
+  felsefe:['Felsefe','🏛️',['1. ÜNİTE: FELSEFEYİ TANIMA']],
+  din:['Din Kültürü','🌙',['1. ÜNİTE: ALLAH İNANCI VE İNSAN']],
+  nesne:['Nesne Tabanlı Prog.','💻',['1. ÜNİTE: KODLAMA TEMELLERİ']],
+  robotik:['Robotik Kodlama','🤖',['1. ÜNİTE: SENSÖRLER VE MİKRODENETLEYİCİLER']]
 };
 const panel=document.getElementById('mainPanel'),themeBtn=document.getElementById('themeBtn');let current=null;
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function renderSubjects(){current=null;panel.innerHTML='<div class="panel-nav"><div class="step">Dersler</div></div><div class="grid">'+Object.entries(subjects).map(([key,s])=>`<article class="card subject" data-key="${key}"><div class="icon">${s[1]}</div><div class="name">${esc(s[0])}</div><div class="muted">Ünite ve konu içeriklerini görüntüle.</div></article>`).join('')+'</div>';document.querySelectorAll('.subject').forEach(c=>c.onclick=()=>renderUnits(c.dataset.key));}
-function renderUnits(key){current=key;const s=subjects[key];panel.innerHTML=`<div class="panel-nav"><button class="nav-btn" id="backBtn" type="button">← Derslere dön</button><div class="step">${s[1]} ${esc(s[0])}</div></div><div class="grid">${s[2].map((unit,i)=>`<article class="card topic" data-index="${i}"><div class="row"><div class="name">${esc(unit)}</div><span class="arrow">→</span></div><div class="muted">Bu ünitedeki konu başlıklarını görüntüle.</div></article>`).join('')}</div>`;document.getElementById('backBtn').onclick=renderSubjects;document.querySelectorAll('.topic').forEach(c=>c.onclick=()=>renderTopic(s[2][c.dataset.index]));}
-function renderTopic(title){const s=subjects[current];panel.innerHTML=`<div class="panel-nav"><button class="nav-btn" id="backUnits" type="button">← Ünitelere dön</button><div class="step">${esc(title)}</div></div><div class="content"><div class="icon">📘</div><h2>İçerik hazırlanıyor</h2><p><strong>${esc(s[0])}</strong> dersinin bu ünitesi için ders notları ve alıştırmalar hazırlanıyor.</p></div>`;document.getElementById('backUnits').onclick=()=>renderUnits(current);}
-function toggleTheme(){const dark=document.documentElement.dataset.theme==='dark';const theme=dark?'light':'dark';document.documentElement.dataset.theme=theme;themeBtn.textContent=dark?'☀️ Beyaz Mod':'🌙 Siyah Mod';localStorage.setItem('theme',theme)}
-function start(){const saved=localStorage.getItem('theme');if(saved){document.documentElement.dataset.theme=saved;themeBtn.textContent=saved==='light'?'☀️ Beyaz Mod':'🌙 Siyah Mod'}themeBtn.onclick=toggleTheme;renderSubjects()}
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+function renderSubjects(){current=null;panel.innerHTML='<div class="panel-nav"><div class="step">Dersler</div></div><div class="grid">'+Object.entries(subjects).map(([key,s])=>`<article class="card" data-key="${key}"><div class="card-title">${s[1]} ${esc(s[0])}</div><ul class="unit-list">${s[2].map(u=>`<li>${esc(u)}</li>`).join('')}</ul></article>`).join('')+'</div>';
+  panel.querySelectorAll('.card').forEach(card=>card.addEventListener('click',()=>renderUnits(card.dataset.key)));
+}
+function renderUnits(key){current=key;const s=subjects[key];panel.innerHTML=`<div class="panel-nav"><button class="nav-btn" id="backBtn" type="button">← Derslere dön</button><div class="step">${esc(s[0])}</div></div><div class="grid">${s[2].map((unit,i)=>`<article class="card" data-index="${i}"><div class="card-title">${esc(unit)}</div><ul class="unit-list"><li>İçerik hazırlanıyor...</li></ul></article>`).join('')}</div>`;
+  panel.querySelectorAll('.card').forEach(card=>card.addEventListener('click',()=>renderTopic(card.dataset.index)));
+  document.getElementById('backBtn').addEventListener('click',renderSubjects);
+}
+function renderTopic(index){const s=subjects[current];panel.innerHTML=`<div class="panel-nav"><button class="nav-btn" id="backUnits" type="button">← Ünitelere dön</button><div class="step">${esc(s[0])}</div></div><div class="card"><div class="card-title">${esc(s[2][index])}</div><ul class="unit-list"><li>Bu ünite için içerik eklenebilir.</li><li>İsterseniz burada ders notu, video veya ödev eklenebilir.</li></ul></div>`;
+  document.getElementById('backUnits').addEventListener('click',()=>renderUnits(current));
+}
+function toggleTheme(){const dark=document.documentElement.dataset.theme==='dark';const theme=dark?'light':'dark';document.documentElement.dataset.theme=theme;themeBtn.textContent=dark?'☀️ Beyaz Mod':'🌙 Karanlık Mod';localStorage.setItem('theme',theme);}
+function start(){const saved=localStorage.getItem('theme');if(saved){document.documentElement.dataset.theme=saved;themeBtn.textContent=saved==='light'?'☀️ Beyaz Mod':'🌙 Karanlık Mod'};themeBtn.addEventListener('click',toggleTheme);renderSubjects();}
 start();
 </script>
 </body>
