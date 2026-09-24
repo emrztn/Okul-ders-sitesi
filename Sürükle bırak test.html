@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wordwall Tarzı Sürükle - Bırak Eşleştirme</title>
+  <style>
+    :root {
+      --primary-color: #4a90e2;
+      --bg-color: #f4f7f6;
+      --card-bg: #ffffff;
+      --correct-color: #2ecc71;
+      --wrong-color: #e74c3c;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      margin: 0;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    p.info {
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    /* Oyun Alanı Düzeni */
+    .game-container {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      max-width: 900px;
+      gap: 30px;
+    }
+
+    .column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .column-title {
+      font-weight: bold;
+      text-align: center;
+      color: #555;
+      margin-bottom: 5px;
+    }
+
+    /* Sürüklenebilir Kartlar */
+    .draggable {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: bold;
+      cursor: grab;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+      user-select: none;
+    }
+
+    .draggable:active {
+      cursor: grabbing;
+    }
+
+    .draggable.dragging {
+      opacity: 0.5;
+      transform: scale(0.95);
+    }
+
+    /* Bırakma Alanları (Hedefler) */
+    .dropzone {
+      background-color: var(--card-bg);
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      min-height: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .dropzone.hovered {
+      background-color: #e8f4fe;
+      border-color: var(--primary-color);
+    }
+
+    .dropzone-label {
+      font-size: 0.9em;
+      color: #777;
+      margin-bottom: 8px;
+    }
+
+    /* Kontrol ve Sonuç Alanı */
+    .controls {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    button {
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    button:hover {
+      background-color: #219150;
+      transform: translateY(-2px);
+    }
+
+    /* Doğru/Yanlış Durumu Stilleri */
+    .correct {
+      border: 2px solid var(--correct-color) !important;
+      background-color: #e8f8f0 !important;
+    }
+
+    .wrong {
+      border: 2px solid var(--wrong-color) !important;
+      background-color: #fdeaea !important;
+    }
+
+    #result-message {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Sürükle & Bırak Eşleştirme Oyunu</h1>
+  <p class="info">Soldaki kavramları sağdaki doğru açıklama kutularına sürükleyip bırakın.</p>
+
+  <div class="game-container">
+    <!-- Sol Sütun: Sürüklenebilir Ögeler -->
+    <div class="column" id="source-column">
+      <div class="column-title">Kavramlar</div>
+      <div class="draggable" draggable="true" id="item-1" data-match="a">Ankara</div>
+      <div class="draggable" draggable="true" id="item-2" data-match="b">Paris</div>
+      <div class="draggable" draggable="true" id="item-3" data-match="c">Tokyo</div>
+      <div class="draggable" draggable="true" id="item-4" data-match="d">Roma</div>
+    </div>
+
+    <!-- Sağ Sütun: Bırakılacak Hedef Alanlar -->
+    <div class="column" id="target-column">
+      <div class="column-title">Açıklamalar / Ülkeler</div>
+      
+      <div class="dropzone" data-accept="a">
+        <span class="dropzone-label">Türkiye'nin Başkenti</span>
+      </div>
+      
+      <div class="dropzone" data-accept="b">
+        <span class="dropzone-label">Fransa'nın Başkenti</span>
+      </div>
+      
+      <div class="dropzone" data-accept="c">
+        <span class="dropzone-label">Japonya'nın Başkenti</span>
+      </div>
+
+      <div class="dropzone" data-accept="d">
+        <span class="dropzone-label">İtalya'nın Başkenti</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button onclick="checkAnswers()">Cevapları Kontrol Et</button>
+    <div id="result-message"></div>
+  </div>
+
+  <script>
+    const draggables = document.querySelectorAll('.draggable');
+    const dropzones = document.querySelectorAll('.dropzone');
+
+    // 1. Sürükleme Başlangıcı ve Bitişi
+    draggables.forEach(draggable => {
+      draggable.addEventListener('dragstart', () => {
+        draggable.classList.add('dragging');
+      });
+
+      draggable.addEventListener('dragend', () => {
+        draggable.classList.remove('dragging');
+      });
+    });
+
+    // 2. Bırakma Alanları Event'leri
+    dropzones.forEach(zone => {
+      zone.addEventListener('dragover', (e) => {
+        e.preventDefault(); // Bırakmaya izin ver
+        zone.classList.add('hovered');
+      });
+
+      zone.addEventListener('dragleave', () => {
+        zone.classList.remove('hovered');
+      });
+
+      zone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        zone.classList.remove('hovered');
+        
+        const draggingItem = document.querySelector('.dragging');
+        if (draggingItem) {
+          zone.appendChild(draggingItem);
+        }
+      });
+    });
+
+    // 3. Doğruluk Kontrolü
+    function checkAnswers() {
+      let correctCount = 0;
+      let total = dropzones.length;
+
+      dropzones.forEach(zone => {
+        const expectedMatch = zone.getAttribute('data-accept');
+        const childItem = zone.querySelector('.draggable');
+
+        // Önceki durumları temizle
+        zone.classList.remove('correct', 'wrong');
+
+        if (childItem) {
+          const itemMatch = childItem.getAttribute('data-match');
+          if (itemMatch === expectedMatch) {
+            zone.classList.add('correct');
+            correctCount++;
+          } else {
+            zone.classList.add('wrong');
+          }
+        } else {
+          zone.classList.add('wrong'); // Boş bırakılmışsa da yanlış say
+        }
+      });
+
+      const messageEl = document.getElementById('result-message');
+      messageEl.textContent = `Toplam ${total} sorudan ${correctCount} tanesini doğru eşleştirdiniz!`;
+      messageEl.style.color = correctCount === total ? '#2ecc71' : '#e74c3c';
+    }
+  </script>
+</body>
+</html>
+
+
