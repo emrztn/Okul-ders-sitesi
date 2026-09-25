@@ -5,13 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Paneli - 10/B Bilişim</title>
   <style>
-    :root{--bg:#090d16;--card:#111726;--border:rgba(255,255,255,.12);--text:#f8fafc;--muted:#94a3b8;--accent:#38bdf8;--danger:#fb7185}
-    *{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#090d16,#17233a);color:var(--text);display:grid;place-items:center;padding:24px}
-    .card{width:min(760px,100%);background:rgba(17,23,38,.96);border:1px solid var(--border);border-radius:22px;padding:32px;box-shadow:0 20px 70px #020617aa}
-    h1{margin:0 0 8px;font-size:clamp(1.7rem,4vw,2.5rem)}p{color:var(--muted);line-height:1.6}.lock{max-width:420px;margin:auto;text-align:center}.icon{font-size:3rem;margin-bottom:8px}
-    label{display:block;text-align:left;font-weight:bold;margin:22px 0 8px}input{width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:12px;background:#0b1220;color:var(--text);font-size:1rem;outline:none}input:focus{border-color:var(--accent)}
-    button{border:0;border-radius:12px;padding:13px 18px;font-size:1rem;font-weight:bold;cursor:pointer;background:var(--accent);color:#062033;transition:transform .15s,opacity .15s}button:hover{transform:translateY(-2px);opacity:.9}.secondary{background:#24334d;color:var(--text)}.danger{color:var(--danger);min-height:24px;margin:12px 0 0;font-weight:bold}
-    .hidden{display:none}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:22px}.actions{display:flex;gap:10px;flex-wrap:wrap}.game-wrap{border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#fff}.game-wrap iframe{display:block;width:100%;height:650px;border:0}.note{font-size:.85rem;margin-top:18px}
+    :root{--bg:#090d16;--card:#111726;--border:rgba(255,255,255,.12);--text:#f8fafc;--muted:#94a3b8;--accent:#38bdf8}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#090d16,#17233a);color:var(--text);display:grid;place-items:center;padding:20px}.card{width:min(1000px,100%);background:rgba(17,23,38,.96);border:1px solid var(--border);border-radius:22px;padding:32px;box-shadow:0 20px 70px #020617aa}h1{margin:0 0 8px;font-size:clamp(1.7rem,4vw,2.5rem)}p{color:var(--muted);line-height:1.6}.lock{max-width:420px;margin:auto;text-align:center}.icon{font-size:3rem;margin-bottom:8px}label{display:block;text-align:left;font-weight:bold;margin:22px 0 8px}input{width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:12px;background:#0b1220;color:var(--text);font-size:1rem}button{border:0;border-radius:12px;padding:13px 18px;font-size:1rem;font-weight:bold;cursor:pointer;background:var(--accent);color:#062033;transition:transform .15s,opacity .15s}button:hover{transform:translateY(-1px);opacity:.9}.secondary{background:#334155;color:#f8fafc}.hidden{display:none}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:22px}.actions{display:flex;gap:10px;flex-wrap:wrap}.game-wrap{border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#fff}iframe{display:block;width:100%;height:min(78vh,850px);border:0}.danger{color:#fb7185;min-height:24px;margin-top:12px}.note{font-size:.8rem;margin-top:22px}
   </style>
 </head>
 <body>
@@ -26,12 +21,12 @@
         <button type="submit" style="width:100%;margin-top:16px">Panele Gir</button>
         <div id="error" class="danger" role="alert" aria-live="polite"></div>
       </form>
-      <p class="note">Not: Bu site statik olduğu için şifre tarayıcı tarafında kontrol edilir; gerçek güvenlik için sunucu taraflı giriş kullanılmalıdır.</p>
+      <p class="note">Not: Bu site statik olduğu için şifre tarayıcı tarafında kontrol edilir.</p>
     </section>
 
     <section id="panel" class="hidden" aria-labelledby="panel-title">
       <div class="top">
-        <div><h1 id="panel-title">Oyun Yönetimi</h1><p>İstediğiniz zaman sürükle-bırak oyununu buradan açabilirsiniz.</p></div>
+        <div><h1 id="panel-title">Oyun Yönetimi</h1><p>Sürükle-bırak oyununu buradan açabilirsiniz.</p></div>
         <div class="actions"><button class="secondary" id="logout" type="button">Çıkış yap</button><button id="openNew" type="button">Yeni sekmede aç ↗</button></div>
       </div>
       <div class="game-wrap"><iframe id="game" title="Sürükle bırak eşleştirme oyunu"></iframe></div>
@@ -40,7 +35,7 @@
   <script>
     'use strict';
     const ADMIN_PASSWORD = 'a_b';
-    const gameUrl = 'Sürükle bırak test.html';
+    const gameUrl = 'Sürükle.html';
     const login = document.getElementById('login');
     const panel = document.getElementById('panel');
     const form = document.getElementById('loginForm');
